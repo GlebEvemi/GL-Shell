@@ -2,11 +2,14 @@
 
 commandFuncType getCommandHandlerByName(char*);
 
+char initial_path[] = "";
+//path = /home/{username}
 
 int main()
 {
 	while (1)
 	{
+		
 		char input[256];
 		fgets(input, 256, stdin);
 

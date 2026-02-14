@@ -1,10 +1,12 @@
 #include"functions.h"
 
+
 typedef void(*commandFuncType) (char *);
 
 
 const char* commandsNames[NUM_COMMANDS] =
 {
+	"ls",
     "copy",
     "paste",
     "cut",
@@ -15,6 +17,7 @@ const char* commandsNames[NUM_COMMANDS] =
 
 commandFuncType commandsPtrs[NUM_COMMANDS] =
 {
+	ls,
     copy,
     paste,
     cut,
@@ -39,6 +42,16 @@ commandFuncType getCommandHandlerByName(char* commandName)
 	}
 
 	return UNKNOWN_COMMAND;
+}
+
+void ls(char* args){
+	struct passwd *info = getpwnam(args);
+	if(info != NULL){
+		printf("%s \n",info->pw_dir);
+	}else{
+		printf("smth went wrong");
+	}
+
 }
 
 
