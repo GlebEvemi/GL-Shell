@@ -11,7 +11,7 @@
 
 
 #define END_CMD "end"
-#define NUM_COMMANDS 8 // Number of commands
+#define NUM_COMMANDS 9 // Number of commands
 #define UNKNOWN_COMMAND NULL
 
 typedef void(*commandFuncType) (char *);
@@ -32,5 +32,6 @@ void paste(char* );
 void cut(char* );
 void find(char* );
 void replace(char* );
+void clear(char *);
 
 #endif

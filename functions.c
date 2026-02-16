@@ -14,7 +14,8 @@ const char* commandsNames[NUM_COMMANDS] =
     "cut",
     "find",
     "replace",
-    "find"
+    "find",
+	"clear"
 };
 
 commandFuncType commandsPtrs[NUM_COMMANDS] =
@@ -26,7 +27,8 @@ commandFuncType commandsPtrs[NUM_COMMANDS] =
     cut,
     find,
     replace,
-    find
+    find,
+	clear
 };
 
 commandFuncType getCommandHandlerByName(char* commandName)
@@ -73,33 +75,36 @@ void ls(char* args){
 //WIP
 void cd(char * args){
 	chdir(args);
-	if(args == "..")
-	chdir("/home");
 }
 
 
 
 void copy(char* args)
 {
-	printf("copy called with args [%s]\n", args);
+	printf("Unfortunately for now I don't know this command)))\n");
 }
 
 void paste(char* args)
 {
-	printf("paste called with args [%s]\n", args);
+	printf("Unfortunately for now I don't know this command)))\n");
 }
 
 void cut(char* args)
 {
-	printf("cut called with args [%s]\n", args);
+	printf("Unfortunately for now I don't know this command)))\n");
 }
 
 void find(char* args)
 {
-	printf("find called with args [%s]\n", args);
+	printf("Unfortunately for now I don't know this command)))\n");
 }
 
 void replace(char* args)
 {
-	printf("replace called with args [%s]\n", args);
+	printf("Unfortunately for now I don't know this command)))\n");
+}
+
+
+void clear(char *args){
+	printf("Unfortunately for now I don't know this command)))\n");
 }

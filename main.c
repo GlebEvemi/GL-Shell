@@ -5,7 +5,7 @@ commandFuncType getCommandHandlerByName(char*);
 int main()
 {
 	//Initilize a default path as /home
-	chdir("/home/lee");
+	chdir("/home");
 	while (1)
 	{
 		
