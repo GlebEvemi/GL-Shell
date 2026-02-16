@@ -3,10 +3,12 @@
 
 typedef void(*commandFuncType) (char *);
 
+char myPath[256];
 
 const char* commandsNames[NUM_COMMANDS] =
 {
 	"ls",
+	"cd",
     "copy",
     "paste",
     "cut",
@@ -18,6 +20,7 @@ const char* commandsNames[NUM_COMMANDS] =
 commandFuncType commandsPtrs[NUM_COMMANDS] =
 {
 	ls,
+	cd,
     copy,
     paste,
     cut,
@@ -44,14 +47,34 @@ commandFuncType getCommandHandlerByName(char* commandName)
 	return UNKNOWN_COMMAND;
 }
 
+//Prints all catalog in selected catalog
 void ls(char* args){
-	struct passwd *info = getpwnam(args);
-	if(info != NULL){
-		printf("%s \n",info->pw_dir);
-	}else{
-		printf("smth went wrong");
-	}
+	DIR *dir = NULL;
+    struct dirent *dp = NULL;
+	int count = 0;
+	if ((dir = opendir (".")) == NULL) {
+        perror ("Cannot open .");
+        abort();
+    }
 
+
+    while ((dp = readdir (dir)) != NULL) {
+		count++;
+		printf("%-20s",dp->d_name);
+		
+		if(count % 4 == 0){
+			putchar('\n');
+		}
+	}
+	putchar('\n');
+
+}
+
+//WIP
+void cd(char * args){
+	chdir(args);
+	if(args == "..")
+	chdir("/home");
 }
 
 

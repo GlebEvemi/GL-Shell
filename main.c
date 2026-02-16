@@ -2,19 +2,22 @@
 
 commandFuncType getCommandHandlerByName(char*);
 
-char initial_path[] = "";
-//path = /home/{username}
-
 int main()
 {
+	//Initilize a default path as /home
+	chdir("/home/lee");
 	while (1)
 	{
 		
 		char input[256];
+		printf("GL-Shell@%s: ", getcwd(myPath, 256));
 		fgets(input, 256, stdin);
 
 		char* commandName = strtok(input, " \n");
 		char* args = strtok(NULL, "\n");
+
+		if (!commandName)
+		continue;
 
 		if (strcmp(commandName, END_CMD) == 0)
 		{

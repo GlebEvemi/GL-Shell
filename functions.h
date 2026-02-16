@@ -2,15 +2,16 @@
 #define FUNCTIONS_H
 
 
-
+#include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
+#include <dirent.h>
 #include <pwd.h>
 
 
 #define END_CMD "end"
-#define NUM_COMMANDS 7
+#define NUM_COMMANDS 8 // Number of commands
 #define UNKNOWN_COMMAND NULL
 
 typedef void(*commandFuncType) (char *);
@@ -20,9 +21,12 @@ extern const char* commandsNames[NUM_COMMANDS];
 
 extern commandFuncType commandsPtrs[NUM_COMMANDS];
 
+extern char myPath[256];
+
 
 commandFuncType getCommandHandlerByName(char* commandName);
 void ls(char *);
+void cd(char *);
 void copy(char* );
 void paste(char* );
 void cut(char* );
