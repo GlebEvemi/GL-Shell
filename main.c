@@ -10,7 +10,8 @@ int main()
 	{
 		
 		char input[256];
-		printf("GL-Shell@%s: ", getcwd(myPath, 256));
+		myPath = getcwd(NULL, 0);
+		printf("->GL-Shell@%s: ", myPath);
 		fgets(input, 256, stdin);
 
 		char* commandName = strtok(input, " \n");
@@ -29,6 +30,7 @@ int main()
         if(commandHandler == UNKNOWN_COMMAND)
             continue;
         commandHandler(args);
+		free(myPath);
 	}
 
 	return 0;

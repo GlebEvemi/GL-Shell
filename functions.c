@@ -3,32 +3,24 @@
 
 typedef void(*commandFuncType) (char *);
 
-char myPath[256];
+char * myPath = NULL;
 
 const char* commandsNames[NUM_COMMANDS] =
 {
 	"ls",
 	"cd",
-    "copy",
-    "paste",
-    "cut",
-    "find",
-    "replace",
-    "find",
-	"clear"
+	"pwd",
+	"mkdir",
+	"rm"
 };
 
 commandFuncType commandsPtrs[NUM_COMMANDS] =
 {
 	ls,
 	cd,
-    copy,
-    paste,
-    cut,
-    find,
-    replace,
-    find,
-	clear
+	pwd,
+	createDir,
+	rm
 };
 
 commandFuncType getCommandHandlerByName(char* commandName)
@@ -62,7 +54,7 @@ void ls(char* args){
 
     while ((dp = readdir (dir)) != NULL) {
 		count++;
-		printf("%-20s",dp->d_name);
+		printf("\t%-20s",dp->d_name);
 		
 		if(count % 4 == 0){
 			putchar('\n');
@@ -72,39 +64,46 @@ void ls(char* args){
 
 }
 
-//WIP
+//Changes Directory
 void cd(char * args){
 	chdir(args);
 }
 
+//Prints path
+void pwd(char * args){
+	char *path = getcwd(NULL, 0);
 
-
-void copy(char* args)
-{
-	printf("Unfortunately for now I don't know this command)))\n");
+	if(path == NULL){
+		perror("getcwd");
+		return;
+	}
+	printf("Path is -> %s\n", path);
+	free(path);
 }
 
-void paste(char* args)
-{
-	printf("Unfortunately for now I don't know this command)))\n");
+//Creates directory
+void createDir(char *args){
+	if(args == NULL){
+		printf("Arguments needed\n");
+		return;
+	}
+	if(!mkdir(args, 0755))
+		printf("Created catalog -> %s\n",args);
+	else
+		perror("mkdir");
 }
 
-void cut(char* args)
-{
-	printf("Unfortunately for now I don't know this command)))\n");
-}
+//Deletes empty dir or file
+//WIP -> You delete files and empty catalogs, but
+//rm should delete non-empty catalogs, several files and files by type(.c, .txt, .h etc.)
+void rm(char * args){
 
-void find(char* args)
-{
-	printf("Unfortunately for now I don't know this command)))\n");
-}
-
-void replace(char* args)
-{
-	printf("Unfortunately for now I don't know this command)))\n");
+	if(!remove(args))
+		printf("Deleted -> %s\n", args);
+	else{
+		printf("Something went wrong((\n");
+	}
+		
 }
 
 
-void clear(char *args){
-	printf("Unfortunately for now I don't know this command)))\n");
-}

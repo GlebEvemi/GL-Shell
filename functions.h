@@ -8,10 +8,11 @@
 #include <unistd.h>
 #include <dirent.h>
 #include <pwd.h>
+#include <sys/stat.h>
 
 
 #define END_CMD "end"
-#define NUM_COMMANDS 9 // Number of commands
+#define NUM_COMMANDS 5 // Number of commands
 #define UNKNOWN_COMMAND NULL
 
 typedef void(*commandFuncType) (char *);
@@ -21,17 +22,14 @@ extern const char* commandsNames[NUM_COMMANDS];
 
 extern commandFuncType commandsPtrs[NUM_COMMANDS];
 
-extern char myPath[256];
+extern char* myPath;
 
 
 commandFuncType getCommandHandlerByName(char* commandName);
 void ls(char *);
 void cd(char *);
-void copy(char* );
-void paste(char* );
-void cut(char* );
-void find(char* );
-void replace(char* );
-void clear(char *);
+void pwd(char *);
+void rm(char *);
+void createDir(char *);
 
 #endif
