@@ -12,7 +12,7 @@
 
 
 #define END_CMD "end"
-#define NUM_COMMANDS 5 // Number of commands
+#define NUM_COMMANDS 7 // Number of commands
 #define UNKNOWN_COMMAND NULL
 
 typedef void(*commandFuncType) (char *);
@@ -31,5 +31,7 @@ void cd(char *);
 void pwd(char *);
 void rm(char *);
 void createDir(char *);
+void exitProgram(char *);
+void clear(char *);
 
 #endif

@@ -11,7 +11,9 @@ const char* commandsNames[NUM_COMMANDS] =
 	"cd",
 	"pwd",
 	"mkdir",
-	"rm"
+	"rm",
+	"exit",
+	"clear"
 };
 
 commandFuncType commandsPtrs[NUM_COMMANDS] =
@@ -20,7 +22,9 @@ commandFuncType commandsPtrs[NUM_COMMANDS] =
 	cd,
 	pwd,
 	createDir,
-	rm
+	rm,
+	exitProgram,
+	clear
 };
 
 commandFuncType getCommandHandlerByName(char* commandName)
@@ -105,5 +109,19 @@ void rm(char * args){
 	}
 		
 }
+
+
+void exitProgram(char *args){
+	printf("Exiting the program\n");
+	exit(0);
+}
+
+//Clears screen
+void clear(char *args){
+	printf("\ec");
+}
+
+
+
 
 
