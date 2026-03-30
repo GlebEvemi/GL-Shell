@@ -11,24 +11,31 @@ int main()
 		
 		char input[256];
 		myPath = getcwd(NULL, 0);
+		if (!myPath) {
+    		perror("getcwd failed");
+    		continue;
+		}
 		printf("->GL-Shell@%s: ", myPath);
-		fgets(input, 256, stdin);
-
+		fgets(input, sizeof(input), stdin);
 		char* commandName = strtok(input, " \n");
 		char* args = strtok(NULL, "\n");
-
-		if (!commandName)
-		continue;
+		if (!commandName){
+			free(myPath);
+			continue;
+		}
 
 		if (strcmp(commandName, END_CMD) == 0)
 		{
+			free(myPath);
 			break;
 		}
 
         commandFuncType commandHandler = getCommandHandlerByName(commandName);
 
-        if(commandHandler == UNKNOWN_COMMAND)
-            continue;
+        if(commandHandler == UNKNOWN_COMMAND){
+			free(myPath);
+			continue;
+		}
         commandHandler(args);
 		free(myPath);
 	}

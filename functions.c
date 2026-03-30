@@ -65,11 +65,16 @@ void ls(char* args){
 		}
 	}
 	putchar('\n');
+	closedir(dir);
 
 }
 
 //Changes Directory
 void cd(char * args){
+	if(args == NULL){
+		printf("No arguments provided, so still in same directory\n");
+		return;
+	}
 	chdir(args);
 }
 
@@ -120,7 +125,6 @@ void exitProgram(char *args){
 void clear(char *args){
 	printf("\ec");
 }
-
 
 
 

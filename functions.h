@@ -9,6 +9,7 @@
 #include <dirent.h>
 #include <pwd.h>
 #include <sys/stat.h>
+#include <assert.h>
 
 
 #define END_CMD "end"
