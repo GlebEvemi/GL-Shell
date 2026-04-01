@@ -10,6 +10,7 @@
 #include <pwd.h>
 #include <sys/stat.h>
 #include <assert.h>
+#include <curl/curl.h>
 
 
 #define END_CMD "end"
