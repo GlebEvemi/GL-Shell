@@ -1,5 +1,6 @@
 #include "functions.h"
 
+
 commandFuncType getCommandHandlerByName(char *);
 
 int getInput(char *input);

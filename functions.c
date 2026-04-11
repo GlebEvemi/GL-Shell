@@ -1,6 +1,5 @@
 #include"functions.h"
 
-
 typedef void (*commandFuncType)(char *);
 
 char *myPath = NULL;
@@ -12,7 +11,8 @@ const char *commandsNames[NUM_COMMANDS] = {
     "mkdir",
     "rm",
     "exit",
-    "clear"
+    "clear",
+    "pcsearch"
 };
 
 commandFuncType commandsPtrs[NUM_COMMANDS] = {
@@ -22,7 +22,8 @@ commandFuncType commandsPtrs[NUM_COMMANDS] = {
     createDir,
     rm,
     exitProgram,
-    clear
+    clear,
+    findComputer
 };
 
 commandFuncType getCommandHandlerByName(char *commandName)
@@ -126,4 +127,14 @@ void exitProgram(char *args)
 void clear(char *args)
 {
     printf("\ec");
+}
+
+//Basically function find a computer by hostname in args, but if args = NULL, it finds all computers
+void findComputer(char *args){
+    if(args == NULL)
+        getAllComputers();
+    else{
+        getComputerByHostname(args);
+    }
+        
 }

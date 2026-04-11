@@ -1,6 +1,6 @@
+
 #ifndef FUNCTIONS_H
 #define FUNCTIONS_H
-
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -14,7 +14,7 @@
 
 
 #define END_CMD "end"
-#define NUM_COMMANDS 7 // Number of commands
+#define NUM_COMMANDS 8 // Number of commands
 #define UNKNOWN_COMMAND NULL
 
 typedef void(*commandFuncType) (char *);
@@ -35,5 +35,11 @@ void rm(char *);
 void createDir(char *);
 void exitProgram(char *);
 void clear(char *);
+void findComputer(char *);
 
-#endif
+
+//api.c
+int getAllComputers();
+int getComputerByHostname(char *hostname);
+
+#endif // FUNCTIONS_H
