@@ -1,33 +1,71 @@
 #include "functions.h"
 
-CURL *curl = NULL;
-CURLcode result = NULL;
-char *header = ""; // Add header here if needed
-struct curl_slist *headers = NULL;
+// Functions requests server and gets all computers
+int getAllComputers(char *server_url){
+    CURL *curl = NULL;
+    CURLcode result;
+    char *header = ""; // Add header here if needed
+    struct curl_slist *headers = NULL;
 
-// Functions requests to server and gets all computers
-int getAllComputers(){
+    //URL concatenation
+    char new_url[512];
+    snprintf(new_url, sizeof(new_url), "%s/api/pc", server_url);
+
+    // Initialize curl
     curl = curl_easy_init();
-    if (curl){
-        curl_easy_setopt(curl, CURLOPT_URL, "127.0.0.1:8080");
-        curl_easy_setopt(curl, CURLOPT_HTTPGET, 1L);
+    if(!curl) return -1;
 
-        result = curl_easy_perform(curl);
+    curl_easy_setopt(curl, CURLOPT_URL, new_url);
+    curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L); // only for testing, remove in production (ignores TLS cert)
+    curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, 0L); // only for testing, remove in production (ignores TLS cert)
+    curl_easy_setopt(curl, CURLOPT_HTTPGET, 1L);
 
-        if(result != CURLE_OK)
-            fprintf(stderr, "curl_easy_perform() failed: %s\n", curl_easy_strerror(result));
-        
-        
+    result = curl_easy_perform(curl);
+
+    if(result != CURLE_OK){
+        fprintf(stderr, "curl_easy_perform() failed: %s\n", curl_easy_strerror(result));
+        curl_easy_cleanup(curl);
+        return -1;
     }
+        
+        
+    
     curl_easy_cleanup(curl);
     return (int)result;
 }
 
 
 
-int getComputerByHostname(char *hostname){
+int getComputerByHostname(char *server_url,char *hostname){
+    CURL *curl = NULL;
+    CURLcode result;
+    char *header = ""; // Add header here if needed
+    struct curl_slist *headers = NULL;
+
+    char new_url[512];
+    char *encoded = curl_easy_escape(curl, hostname, 0);
+    snprintf(new_url, sizeof(new_url), "%s/api/pc/%s", server_url, encoded);
+    curl_free(encoded);
+
+    // Initialize curl
     curl = curl_easy_init();
-    if (curl){
-        //WIP
+    if(!curl) return -1;
+
+    curl_easy_setopt(curl, CURLOPT_URL, new_url);
+    curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L); // only for testing, remove in production (ignores TLS cert)
+    curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, 0L); // only for testing, remove in production (ignores TLS cert)
+    curl_easy_setopt(curl, CURLOPT_HTTPGET, 1L);
+
+    result = curl_easy_perform(curl);
+
+    if(result != CURLE_OK){
+        fprintf(stderr, "curl_easy_perform() failed: %s\n", curl_easy_strerror(result));
+        curl_easy_cleanup(curl);
+        return -1;
     }
+    
+    curl_easy_cleanup(curl);
+    return (int)result;
+
+
 }

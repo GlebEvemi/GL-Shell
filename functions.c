@@ -131,10 +131,23 @@ void clear(char *args)
 
 //Basically function find a computer by hostname in args, but if args = NULL, it finds all computers
 void findComputer(char *args){
-    if(args == NULL)
-        getAllComputers();
+    char server_url[256];
+    puts("Enter server URL");
+    if (fgets(server_url, sizeof(server_url), stdin) == NULL) {
+        fprintf(stderr, "Invalid input\n");
+        return;
+    }
+    if(server_url[0] == '\0'){
+        fprintf(stderr, "Server URL is required\n");
+        return;
+    }
+    if(args == NULL || strlen(args) == 0){
+        if(getAllComputers(server_url) == -1)
+            fprintf(stderr, "Failed to get all computers\n");
+    }
     else{
-        getComputerByHostname(args);
+        if(getComputerByHostname(server_url, args) == -1)
+            fprintf(stderr, "Failed to get computer by hostname\n");
     }
         
 }
