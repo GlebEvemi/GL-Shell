@@ -39,7 +39,7 @@ void findComputer(char *);
 
 
 //api.c
-int getAllComputers(char *server_url);
-int getComputerByHostname(char * server_url, char *hostname);
+int getAllComputers(char *server_url, char *username, char *password);
+int getComputerByHostname(char * server_url, char *hostname, char *username, char *password);
 
 #endif // FUNCTIONS_H

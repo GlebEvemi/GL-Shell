@@ -131,22 +131,47 @@ void clear(char *args)
 
 //Basically function find a computer by hostname in args, but if args = NULL, it finds all computers
 void findComputer(char *args){
-    char server_url[256];
+    char server_url[128];
+    char username[64];
+    char password[64];
     puts("Enter server URL");
     if (fgets(server_url, sizeof(server_url), stdin) == NULL) {
         fprintf(stderr, "Invalid input\n");
         return;
     }
+    server_url[strcspn(server_url, "\n")] = 0;
     if(server_url[0] == '\0'){
         fprintf(stderr, "Server URL is required\n");
         return;
     }
+    puts("Enter username: ");
+    if (fgets(username, sizeof(username), stdin) == NULL) {
+        fprintf(stderr, "Invalid input\n");
+        return;
+    }
+    username[strcspn(username, "\n")] = 0;
+    if(username[0] == '\0'){
+        fprintf(stderr, "Username is required\n");
+        return;
+    }
+    puts("Enter password: ");
+    if (fgets(password, sizeof(password), stdin) == NULL) {
+        fprintf(stderr, "Invalid input\n");
+        return;
+    }
+    password[strcspn(password, "\n")] = 0;
+    if(password[0] == '\0'){
+        fprintf(stderr, "Password is required\n");
+        return;
+    }
     if(args == NULL || strlen(args) == 0){
-        if(getAllComputers(server_url) == -1)
+        puts("Finding all computers...");
+        if(getAllComputers(server_url, username, password) == -1)
             fprintf(stderr, "Failed to get all computers\n");
+        putchar('\n');
     }
     else{
-        if(getComputerByHostname(server_url, args) == -1)
+        if(getComputerByHostname(server_url, args, username, password) == -1)
             fprintf(stderr, "Failed to get computer by hostname\n");
     }
         
