@@ -1,5 +1,10 @@
 #include"functions.h"
 
+//typedef struct {
+//    commandFuncType func;
+//    char *name;
+//} programString;
+
 typedef void (*commandFuncType)(char *);
 
 char *myPath = NULL;
@@ -173,6 +178,7 @@ void findComputer(char *args){
     else{
         if(getComputerByHostname(server_url, args, username, password) == -1)
             fprintf(stderr, "Failed to get computer by hostname\n");
+        putchar('\n');
     }
         
 }

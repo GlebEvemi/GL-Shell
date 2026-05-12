@@ -11,6 +11,7 @@
 #include <sys/stat.h>
 #include <assert.h>
 #include <curl/curl.h>
+#include "cJSON.h"
 
 
 #define END_CMD "end"

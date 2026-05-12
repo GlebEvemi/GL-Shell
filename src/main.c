@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
         char input[256];
         myPath = getcwd(NULL, 0);
         assert(myPath != NULL && "getcwd failed");
-        printf("->GL-Shell@%s: ", myPath);
+        printf(">>%s: ", myPath);
 
             
         //Input handle
