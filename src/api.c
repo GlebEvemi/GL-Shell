@@ -35,7 +35,7 @@ int getAllComputers(char *server_url, char *username, char *password){
 }
 
 
-
+// Function requests server and gets computer by hostname
 int getComputerByHostname(char *server_url,char *hostname, char *username, char *password){
     CURL *curl = NULL;
     // Initialize curl
