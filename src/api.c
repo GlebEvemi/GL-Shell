@@ -20,6 +20,7 @@ int getAllComputers(char *server_url, char *username, char *password){
     curl_easy_setopt(curl, CURLOPT_USERNAME, username);
     curl_easy_setopt(curl, CURLOPT_PASSWORD, password);
     curl_easy_setopt(curl, CURLOPT_HTTPGET, 1L);
+    curl_easy_setopt(curl, CURLOPT_TIMEOUT, 5L); // 5 second timeout
 
 
     result = curl_easy_perform(curl);
@@ -57,6 +58,7 @@ int getComputerByHostname(char *server_url,char *hostname, char *username, char 
     curl_easy_setopt(curl, CURLOPT_HTTPGET, 1L);
     curl_easy_setopt(curl, CURLOPT_USERNAME, username);
     curl_easy_setopt(curl, CURLOPT_PASSWORD, password);
+    curl_easy_setopt(curl, CURLOPT_TIMEOUT, 5L); // 5 second timeout
 
     result = curl_easy_perform(curl);
 

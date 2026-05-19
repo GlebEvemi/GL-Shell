@@ -158,6 +158,41 @@ The project has a development roadmap:
 
 ## Testing
 
+### Unit Tests
+
+The project includes comprehensive unit tests using the Check framework. Tests cover:
+- Command routing and execution
+- File system operations (mkdir, cd, rm)
+- API functions with error handling
+- Edge cases and null parameter handling
+
+**Test Statistics:**
+- Total Tests: 26
+- Functions: 18 tests
+- API: 8 tests
+- All tests passing ✅
+
+### Running Tests
+
+Build and run all tests:
+```bash
+cd build
+cmake ..
+make
+make run_tests
+```
+
+Or run individual test suites:
+```bash
+cd build
+./test_functions    # Run function tests
+./test_api          # Run API tests
+```
+
+For detailed test information, see [tests/README.md](tests/README.md)
+
+### Memory Leak Detection
+
 The project includes a hint for checking memory leaks with valgrind:
 
 ```bash
